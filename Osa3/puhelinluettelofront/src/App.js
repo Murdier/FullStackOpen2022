@@ -30,38 +30,41 @@ const App = () => {
         if (persons.filter(x => x.name === newName).length == 0) {
             const personObject = {
                 name: newName,
-                number: newNumber,
-                id: (persons.length + 1)
+                number: newNumber
             }
 
             DataAccess.create(personObject).then((value) => {
-                setPersons(persons.concat(personObject))
-
-                setNotification("Added " + personObject.name);
-                setNotificationIsError(false);
-                setTimeout(() => { setNotification(null) }, 3000);
-
-                setNewNumber('')
-                setNewName('')
-            }).catch(error => {
-                setNotificationIsError(true);
-                setNotification("Couldn't create the user");
-            });
-        } else {
-            var personToUpdate = persons.filter(x => x.name === newName)[0];
-            personToUpdate.number = newNumber;
-
-            setNotificationIsError(false);
-            setNotification("Updated number for " + personToUpdate.name);
-            setTimeout(() => { setNotification(null) }, 3000);
-
-            DataAccess.update(personToUpdate.id, personToUpdate).then(resp => {
                 DataAccess.getAll().then(response => {
                     setPersons(response.data)
+
+                    setNotification("Added " + personObject.name);
+                    setNotificationIsError(false);
+                    setTimeout(() => { setNotification(null) }, 3000);
+
+                    setNewNumber('')
+                    setNewName('')
                 })
             }).catch(error => {
                 setNotificationIsError(true);
-                setNotification("Couldn't update the user");
+                setNotification("Couldn't create the user; " + error.response.data.error);
+            });
+        } else {
+            var personToUpdate = persons.filter(x => x.name.toLowerCase() === newName.toLowerCase())[0];
+            console.log(personToUpdate);
+            personToUpdate.number = newNumber;
+
+
+            DataAccess.update(personToUpdate.id, personToUpdate).then(resp => {                
+                DataAccess.getAll().then(response => {
+                    setPersons(response.data)
+
+                    setNotificationIsError(false);
+                    setNotification("Updated number for " + personToUpdate.name);
+                    setTimeout(() => { setNotification(null) }, 3000);
+                })
+            }).catch(error => {
+                setNotificationIsError(true);
+                setNotification("Couldn't update the user; " + error.response.data.error);
             });
 
         }
@@ -70,14 +73,17 @@ const App = () => {
     const removePerson = (event) => {
         event.preventDefault()        
 
-        setNotificationIsError(false);
-        setNotification("Deleted " + persons.filter(x => x.id == event.target.id)[0].name);
-        setTimeout(() => { setNotification(null) }, 3000);
-
-        DataAccess.remove(event.target.id).catch(error => {
+        DataAccess.remove(event.target.id).then(resp => {
+            setNotificationIsError(false);
+            setNotification("Deleted " + persons.filter(x => x.id == event.target.id)[0].name);
+            setTimeout(() => { setNotification(null) }, 3000);
+        }).catch(error => {
             setNotificationIsError(true);
-            setNotification("Couldn't remove the user");
+            console.log(error);
+            console.log(error.response.data);
+            setNotification("Couldn't remove the user; " + error.response.data.error);
         });;
+
         setPersons(persons.filter(x => x.id != event.target.id))
     }
 
