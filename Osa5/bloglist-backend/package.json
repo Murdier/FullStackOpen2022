@@ -1,0 +1,36 @@
+{
+  "name": "notebackend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env node index.js",
+    "dev": "cross-env nodemon index.js",
+    "test": "cross-env jest --verbose --runInBand --detectOpenHandles",
+    "lint": "eslint .",
+    "build:ui": "rmdir /s /q build && cd C:\\Users\\Temp-Admin\\Desktop\\school\\2022\\FullStackOpen\\FullStackOpen2022\\Osa4\\blogilista\\front && npm run build && xcopy build C:\\\\Users\\Temp-Admin\\Desktop\\school\\2022\\FullStackOpen\\FullStackOpen2022\\Osa4\\blogilista\\back\\build /E /I",
+    "deploy:full": "npm run build:ui && git add . && git commit -m \"uibuild\" && git push"
+  },
+  "author": "Joni Orrensalo",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.9.0",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^8.32.0",
+    "jest": "^29.4.0",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.3"
+  },
+  "jest": {
+    "testEnvironment": "node"
+  }
+}
