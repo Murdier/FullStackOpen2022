@@ -1,0 +1,20 @@
+// These .rest files are for the REST client plugin.
+// After clicking the "Send request",
+// the REST client will execute the HTTP request and
+// response from the server is opened in the editor. 
+
+POST http://localhost:3001/api/blogs/634579233a66f66d7fee56ba/comments
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRpbXRlcyIsImlkIjoiNjJlMmMyNWFjYmI1NDViM2U2YTI3MjljIiwiaWF0IjoxNjY1NDk2Mzk5fQ.Lwv_98sDYMzABs9at4dRSobVA0i8RdZN1s-Hn7FZeng
+
+  {
+  "title": "First class tests-osa-2",
+  "url": "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.html",
+  "author": "Robert C. Martin",
+  "likes": 22,
+  "comments": [
+    "jee",
+    "jee2",
+    "jee4"
+  ]
+  }

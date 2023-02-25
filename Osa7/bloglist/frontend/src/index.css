@@ -1,0 +1,45 @@
+.error {
+    color: red;
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.success {
+    color: green;
+    background: lightgrey;
+    font-size: 20px;
+    border-style: solid;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.blogTitleButton {
+    border-radius: 10px;
+    cursor: pointer;
+    width: 75%;
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.deleteButton {
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: red;
+}
+
+.likeButton {
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: green;
+}
+
+.addButton {
+    cursor: pointer;
+    background-color: blue;
+}
